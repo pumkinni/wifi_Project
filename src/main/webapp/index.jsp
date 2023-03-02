@@ -94,14 +94,14 @@
         </tr>
     </thead>
     <%
-    String lat = request.getParameter("LAT");
-	String lnt = request.getParameter("LNT");
+    String lat = request.getParameter("LAT") ;
+	String lnt = request.getParameter("LNT") ;
 	
 	System.out.println(lat);
 	System.out.println(lnt);
 	
 
-   	if (lat == null &  lnt == null){
+   	if (lat == null && lnt == null){
    	
    	%>
    	<tbody>
@@ -114,9 +114,12 @@
    		%>
    		<tbody>
 		<%	Services service = new Services(); 
+		PriorityQueue<WifiKilometer> wifiList = service.wifiList(lat, lnt);
    		
-			for(WifiKilometer nearWifi : service.wifiList(lat, lnt)){
+			while (!wifiList.isEmpty()){
+				WifiKilometer nearWifi = wifiList.poll();
 				PublicWifiItem wifi = nearWifi.getItem();  %>
+				
 				<tr>
 	 		 	<td><%=nearWifi.getKilo()%> </td>
 				<td> <%=wifi.getX_SWIFI_MGR_NO()%> </td>

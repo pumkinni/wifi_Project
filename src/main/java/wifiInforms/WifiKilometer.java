@@ -25,3 +25,5 @@ public class WifiKilometer implements  Comparable<WifiKilometer>{
 	}
 
 }
+
+

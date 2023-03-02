@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.PriorityQueue;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Services {
@@ -105,8 +106,8 @@ public class Services {
 	
 	
 	public PriorityQueue<WifiKilometer> wifiList(String nowLat, String nowLnt){
-		
 		PriorityQueue<WifiKilometer> itemList = new PriorityQueue<>();
+		PriorityQueue<WifiKilometer> reverseList = new PriorityQueue<>(Collections.reverseOrder());
     	
         String url = "jdbc:mariadb://localhost:3306/wifiProject";
         String dbUserId = "testuser1";
@@ -189,8 +190,7 @@ public class Services {
                 
                 if (itemList.size() > 20) {
                 	itemList.poll();
-                }
-                
+                } 
                }
 
         } catch (SQLException e) {
@@ -221,8 +221,11 @@ public class Services {
                 e.printStackTrace();
             }
         }
+        while (!itemList.isEmpty()) {
+        	reverseList.offer(itemList.poll());
+        }
         
-        return itemList;
+        return reverseList;
     }
     
 	
