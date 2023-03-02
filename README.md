@@ -6,14 +6,18 @@
 project execution period : 2023.02.28 ~ 2023.03.02
 *****
 
-데이터 모델링 
+### 데이터 모델링 
+
 <img width="664" alt="wifi-erd" src="https://user-images.githubusercontent.com/102509636/222399033-570963d5-6d07-4c2b-b09e-a3ccf88088a6.png">
 
-기능구현
 
-홈화면
+
+### 홈화면
 
 <img width="800" alt="스크린샷 2023-03-02 18 53 59" src="https://user-images.githubusercontent.com/102509636/222394808-305b2b85-bf6d-4e28-bbc5-1c30f4d5b8d2.png">
+
+*****
+### 기능 구현
 
 1. 내 위치(위도, 경도) 가져오기
 
@@ -32,7 +36,8 @@ project execution period : 2023.02.28 ~ 2023.03.02
 5. 위치 히스토리 정보 삭제
 <img width="600" alt="스크린샷 2023-03-02 19 06 58" src="https://user-images.githubusercontent.com/102509636/222398365-86c4cacf-bceb-4f3e-905d-75d9a9a9ccf9.png">
 
-## 파일
+*****
+### 파일
 [Java]()
 
 - [Java/Service](https://github.com/pumkinni/mini_project1/tree/main/src/main/java/service) : 서비스를 위한 자바 파일
