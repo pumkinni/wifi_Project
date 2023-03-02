@@ -6,10 +6,10 @@
 project execution period : 2023.02.28 ~ 2023.03.02
 *****
 
-- 데이터 모델링 
+데이터 모델링 
 <img width="664" alt="wifi-erd" src="https://user-images.githubusercontent.com/102509636/222399033-570963d5-6d07-4c2b-b09e-a3ccf88088a6.png">
 
-- 기능구현 사진
+기능구현
 
 홈화면
 
