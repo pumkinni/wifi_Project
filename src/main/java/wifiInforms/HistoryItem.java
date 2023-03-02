@@ -1,10 +1,10 @@
 package wifiInforms;
 
 public class HistoryItem {
-	Integer id;
-	float lat;
-	float lnt;
-	String date;
+	private Integer id;
+	private float lat;
+	private float lnt;
+	private String date;
 	
 	public String getDate() {
 		return date;

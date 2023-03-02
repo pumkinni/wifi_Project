@@ -8,9 +8,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script type="text/javascript">
+function getParameter(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+</script>
 <body>
 	
-	// 위치 history에 값 저장
+ 	<!-- 위치 history에 값 저장 -->
 	<%  
 		String lat = request.getParameter("LAT");
 		String lnt = request.getParameter("LNT");
@@ -22,8 +30,13 @@
 		
 	%>
 
-	// 이전 페이지로 돌아가
-	<script>history.back();</script>
+	<!-- 이전 페이지로 돌아가기 -->
+	<script>
+	var lat = getParameter("LAT");
+	var lnt = getParameter("LNT");
+	var url = 'index.jsp?LAT=' + lat + '&LNT= ' + lnt;
+	location.replace(url);
+	</script>
 
 
 </body>

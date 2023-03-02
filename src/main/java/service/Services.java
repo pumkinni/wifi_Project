@@ -2,8 +2,6 @@ package service;
 
 import com.google.gson.Gson;
 
-
-
 import wifiInforms.PublicWifiList;
 import wifiInforms.PublicWifiListResult;
 import wifiInforms.WifiKilometer;
@@ -17,13 +15,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.PriorityQueue;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Services {
-	
+	 
 
 	public static List<HistoryItem> historyList(){
     	List<HistoryItem> itemList = new ArrayList();
@@ -163,8 +160,6 @@ public class Services {
                 String workDate = rs.getString("WORK_DATE");
                 
                 
-                
-                
                 PublicWifiItem item = new PublicWifiItem();
                 item.setX_SWIFI_MGR_NO(manageNo);
                 item.setX_SWIFI_WRDOFC(gu);
@@ -185,12 +180,14 @@ public class Services {
                 
                 WifiKilometer wifiKilometer = new WifiKilometer();
                 wifiKilometer.setItem(item); 
-                wifiKilometer.setKilo(distanceInKilometer(Double.parseDouble(lat), Double.parseDouble(lnt), 
-                		Double.parseDouble(nowLat), Double.parseDouble(nowLnt)));
+                double kilo = Math.round(distanceInKilometer(Double.parseDouble(lat), Double.parseDouble(lnt), 
+                		Double.parseDouble(nowLat), Double.parseDouble(nowLnt)) * 1000) / 1000.0;
+                
+                wifiKilometer.setKilo(kilo);
                 
                 itemList.offer(wifiKilometer);
                 
-                if (itemList.size() > 100) {
+                if (itemList.size() > 20) {
                 	itemList.poll();
                 }
                 
@@ -230,7 +227,7 @@ public class Services {
     
 	
 	// 하버파인 -> 위경도 거리 구하기
-	public static double distanceInKilometer(double x1, double y1, double x2, double y2) {
+	public double distanceInKilometer(double x1, double y1, double x2, double y2) {
 	    double distance;
 	    double radius = 6371; // 지구 반지름(km)
 	    double toRadian = Math.PI / 180;
@@ -409,7 +406,7 @@ public class Services {
         return success;
     }
 	
-	public static void insertHistory(String Lat, String Lnt){
+	public void insertHistory(String Lat, String Lnt){
 
         String url = "jdbc:mariadb://localhost:3306/wifiProject";
         String dbUserId = "testuser1";
@@ -448,6 +445,77 @@ public class Services {
                 System.out.println("저장 성공");
             } else {
                 System.out.println("저장 실패");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            //6. 객체 연결 해제(close) - 무조건 실행 되어야하므로 마지막에 실행
+            try {
+                if (rs != null && !rs.isClosed()){
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                if (preparedStatement != null && !preparedStatement.isClosed()){
+                    preparedStatement.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                if (connection != null && !connection.isClosed()){
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        
+    }
+	
+	public void deleteHistory (String id){
+
+        String url = "jdbc:mariadb://localhost:3306/wifiProject";
+        String dbUserId = "testuser1";
+        String dbPassword = "0000";
+
+        //1. 드라이버 로드
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        //2. 커넥션 개채 생성
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+
+        try {
+            connection = DriverManager.getConnection(url, dbUserId, dbPassword);
+
+            //3. 스테이트먼트 객체 생성
+            String sql = " Delete from LOCATION_HISTORY "
+            		+ " where ID = ?; ";
+
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, Integer.parseInt(id));
+
+            //4. 쿼리실행
+            int effected = preparedStatement.executeUpdate();
+
+            // 5. 결과 확인
+            if (effected > 0){
+            	System.out.println("삭제 성공");
+
+            } else {
+                System.out.println("삭제 실패");
             }
 
         } catch (SQLException e) {

@@ -11,7 +11,7 @@
 <title>위치 히스토리 정보</title>
 <h1>위치 히스토리 정보</h1>
 </head>
-   
+ 
 <style>
 	td, th {
 	  text-align: center;
@@ -63,8 +63,12 @@
 					<td> <%=item.getLat()%> </td>
 					<td> <%=item.getLnt()%> </td>
 					<td> <%=item.getDate() %> </td>
-					<td> 비고
-					 </td>
+					<td>  
+					<form method="get" action="historyDelete.jsp">
+						<input type="hidden" name="deleteID" value=<%=item.getId() %> >
+						<input type="submit" name = "delete" value = "삭제">
+					</form>
+					</td>
 				</tr>
 			<%
 			}

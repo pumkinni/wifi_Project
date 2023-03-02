@@ -63,7 +63,7 @@
 		
 		<input type="button" onclick="clickBtn()" value= "내 위치 가져오기">
 		
-		<input type="submit" value="근처 wifi 정보 보기" onclick = "clickBtn()">
+		<input type="submit" value="근처 wifi 정보 보기" onclick = "btn()">
 		
  		</form>
 	
@@ -96,6 +96,10 @@
     <%
     String lat = request.getParameter("LAT");
 	String lnt = request.getParameter("LNT");
+	
+	System.out.println(lat);
+	System.out.println(lnt);
+	
 
    	if (lat == null &  lnt == null){
    	
@@ -109,14 +113,11 @@
    		
    		%>
    		<tbody>
-			<tr>
-			
 		<%	Services service = new Services(); 
-	    	PriorityQueue<WifiKilometer> nearWifiList = service.wifiList(lat, lnt);
    		
-			for(WifiKilometer nearWifi : nearWifiList){
+			for(WifiKilometer nearWifi : service.wifiList(lat, lnt)){
 				PublicWifiItem wifi = nearWifi.getItem();  %>
-				
+				<tr>
 	 		 	<td><%=nearWifi.getKilo()%> </td>
 				<td> <%=wifi.getX_SWIFI_MGR_NO()%> </td>
 				<td> <%=wifi.getX_SWIFI_WRDOFC() %> </td>
@@ -133,8 +134,9 @@
 				<td><%=wifi.getX_SWIFI_REMARS3() %></td>
 				<td><%=wifi.getLAT() %></td>
 				<td><%=wifi.getLNT() %></td>
-				<td><%=wifi.getWORK_DTTM() %></td>	
-				
+				<td><%=wifi.getWORK_DTTM() %></td>
+				</tr>	
+			
 				<% 
 			}
    	}
