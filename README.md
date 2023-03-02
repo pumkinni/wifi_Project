@@ -31,3 +31,27 @@ project execution period : 2023.02.28 ~ 2023.03.02
 
 5. 위치 히스토리 정보 삭제
 <img width="600" alt="스크린샷 2023-03-02 19 06 58" src="https://user-images.githubusercontent.com/102509636/222398365-86c4cacf-bceb-4f3e-905d-75d9a9a9ccf9.png">
+
+## 파일
+[Java]()
+
+- [Java/Service](https://github.com/pumkinni/mini_project1/tree/main/src/main/java/service) : 서비스를 위한 자바 파일
+
+  - [OpenApi.java](https://github.com/pumkinni/mini_project1/blob/main/src/main/java/service/OpenApi.java) : 시작 페이지, 마지막 페이지를 입력하여 open api에서 json 정보 받아오기
+
+  - [Services.java](https://github.com/pumkinni/mini_project1/blob/main/src/main/java/service/Services.java) : 데이터 출력, 입력, 삭제를 위한 모든 메소드 정보
+
+- [Java/wifiInforms](https://github.com/pumkinni/mini_project1/tree/main/src/main/java/wifiInforms) : 와이파이 정보를 주고 받기 위한 클래스들
+
+
+[webapp](https://github.com/pumkinni/mini_project1/tree/main/src/main/webapp)
+
+- [dataProcess.jsp](https://github.com/pumkinni/mini_project1/blob/main/src/main/webapp/dataProcess.jsp) : 근처 와이파이 정보 보기 클릭 시 작동 (히스토리에 정보저장, 근처 와이파이 정보들 출력을 위한 아이디 전달)
+
+- [history.jsp](https://github.com/pumkinni/mini_project1/blob/main/src/main/webapp/history.jsp) : 히스토리 정보 출력 페이지
+
+- [index.jsp](https://github.com/pumkinni/mini_project1/blob/main/src/main/webapp/index.jsp) : 홈화면
+
+- [load-wifi.jsp](https://github.com/pumkinni/mini_project1/blob/main/src/main/webapp/load-wifi.jsp) : 와이파이 정보를 가져오는 페이지
+
+
