@@ -1,4 +1,4 @@
-# mini_project1
+# Wifi Service(mini project)
 
 
 ## 공공 와이파이 정보 OPEN API를 통해 근처 와이파이 20개를 보여주는 시스템
